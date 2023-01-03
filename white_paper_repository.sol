@@ -24,7 +24,8 @@ contract white_paper_repository {
         price = price_inpt;
     }
 
-    function purchase(string memory title, string memory content, string memory metadata, address owner) public {
+    function purchase(string memory title, string memory content, string memory metadata, address owner) public payable {
+        require(msg.value >= price, 'Does not meet price requirement');
         Paper memory new_paper = Paper(title, content, metadata, owner);
         minted_paper.push(new_paper);
     }
